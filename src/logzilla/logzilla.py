@@ -18,7 +18,6 @@ from __future__ import annotations
 
 import datetime
 import logging
-import os
 import time
 from pathlib import Path
 from typing import Callable
@@ -69,6 +68,7 @@ class LogZilla:
             return
         else:
             logging.info("Root logger initialized.")
+            cls.__initialized = True
 
         log_file_name = datetime.datetime.now().strftime(f"%Y.%m.%d %H.%M.%S {log_file_name_append}.log")
         log_file_dir = output_dir / cls.__log_folder_name
@@ -171,6 +171,7 @@ def main() -> None:
         file_level=logging.DEBUG,
         no_console_file_info=True,
     )
+
     logger = logging.getLogger(__name__)
     logger.debug("debug message")
     logger.info("info message")
