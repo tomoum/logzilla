@@ -127,8 +127,6 @@ commands =
 """
 
 [tool.pylint]
-logging-format-style = "new"
-
 extension-pkg-whitelist = [
     "numpy",
     "torch",
@@ -148,6 +146,7 @@ persistent = "yes"
 suggestion-mode = "yes"
 unsafe-load-any-extension = "no"
 disable = "W1203"
+
 [tool.pylint.'MESSAGES CONTROL']
 enable = "c-extension-no-member"
 
@@ -170,7 +169,7 @@ class-naming-style = "PascalCase"
 const-naming-style = "UPPER_CASE"
 docstring-min-length = -1
 function-naming-style = "snake_case"
-good-names = ["i", "j", "k", "ex", "Run", "_"]
+good-names = ["_"]
 include-naming-hint = "yes"
 inlinevar-naming-style = "any"
 method-naming-style = "snake_case"
@@ -180,20 +179,13 @@ property-classes = "abc.abstractproperty"
 variable-naming-style = "snake_case"
 
 [tool.pylint.'FORMAT']
-ignore-long-lines = "^\\s*(# )?.*['\"]?<?https?://\\S+>?"
-indent-after-paren = 4
-indent-string = '    '
 max-line-length = 120
 max-module-lines = 1000
-single-line-class-stmt = "no"
-single-line-if-stmt = "no"
 
 [tool.pylint.'LOGGING']
-logging-format-style = "old"
+logging-format-style = "new"
 logging-modules = "logging"
 
-[tool.pylint.'MISCELLANEOUS']
-notes = ["FIXME", "XXX", "TODO"]
 
 [tool.pylint.'SIMILARITIES']
 ignore-comments = "yes"
