@@ -8,6 +8,7 @@
 - [2. Table of Contents](#2-table-of-contents)
 - [3. Demo](#3-demo)
 - [4. Docs](#4-docs)
+- [TODO](#todo)
 
 # 3. Demo
 
@@ -16,3 +17,7 @@ TODO: Add demo
 # 4. Docs
 
 * [Developer](docs/developer.md)
+
+# TODO
+
+* add pre-commit hooks for [black, pyling, flake8, bandit, tox, pytest]
