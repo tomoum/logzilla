@@ -43,11 +43,10 @@ The pyproject.toml file specifies the maximum line length and whether or not to 
 
 ## 4.2. pre-commit-config.yaml
 
-Pre-commit is a Python package which can be used to create 'git' hooks which scan can prior to checkins.
-The included configuration focuses on python actions which will help to prevent users from commiting code which will fail during builds.
-In general, only formatting actions are automatiicaly performed. These include auto-formatting with 'black', or sorting dependacies with 'isort'.
+Pre-commit is a Python package which can be used to create 'git' hooks which scan can prior to checking in code.
+The included configuration focuses on python actions which will help to prevent users from committing code which will fail during builds.
+In general, only formatting actions are automatically performed. These include auto-formatting with 'black', or sorting dependencies with 'isort'.
 Linting actions are left to the discretion of the user.
-
 
 ## 4.3. coverage
 
@@ -84,4 +83,3 @@ In our repository, we use Tox to automate testing and building our Python packag
 The [tool.tox] section in the pyproject.toml file contains the Tox configuration details, including the legacy_tox_ini attribute. Our setup outlines the dependencies needed for each environment, as well as the test runner (e.g., pytest) and any associated commands. This ensures consistent test execution across all environments.
 
 Tox helps us efficiently automate testing and building processes, maintaining the reliability and functionality of our Python package across a wide range of environments. By identifying potential compatibility issues early in the development process, we improve the quality and usability of our package. Our Tox configuration streamlines the development workflow, promoting code quality and consistency throughout the project.
-
