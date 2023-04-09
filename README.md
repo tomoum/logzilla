@@ -16,4 +16,3 @@ TODO: Add demo
 # 4. Docs
 
 * [Developer](docs/developer.md)
-

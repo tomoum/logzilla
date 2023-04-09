@@ -1,0 +1,17 @@
+{
+    "recommendations": [
+        "tamasfe.even-better-toml",
+        "ms-python.isort",
+        "ms-python.python",
+        "ms-python.black-formatter",
+        "streetsidesoftware.code-spell-checker",
+        "editorconfig.editorconfig",
+        "ms-python.flake8",
+        "eamodio.gitlens",
+        "nhoizey.gremlins",
+        "ms-python.vscode-pylance",
+        "kevinrose.vsc-python-indent",
+        "jonnyasmar.run-it-on-v2",
+        "sourcery.sourcery"
+    ]
+}
