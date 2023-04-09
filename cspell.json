@@ -1,9 +1,13 @@
 {
    "version": "0.2",
-   "ignorePaths": [ ],
-   "dictionaryDefinitions": [ ],
-   "dictionaries": [ ],
-   "words": [ ],
-   "ignoreWords": [ ],
-   "import": [ ]
+   "ignorePaths": [],
+   "dictionaryDefinitions": [],
+   "dictionaries": [],
+   "words": [
+      "errstream",
+      "levelname",
+      "Zilla"
+   ],
+   "ignoreWords": [],
+   "import": []
 }

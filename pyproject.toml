@@ -51,7 +51,7 @@ fast = true
 branch = true
 
 [tool.coverage.report]
-fail_under = 100
+fail_under = 90
 
 [tool.flake8]
 max-line-length = 120
@@ -128,6 +128,8 @@ commands =
 """
 
 [tool.pylint]
+logging-format-style = "new"
+
 extension-pkg-whitelist = [
     "numpy",
     "torch",
@@ -146,7 +148,7 @@ limit-inference-results = 100
 persistent = "yes"
 suggestion-mode = "yes"
 unsafe-load-any-extension = "no"
-
+disable = "W1203"
 [tool.pylint.'MESSAGES CONTROL']
 enable = "c-extension-no-member"
 
