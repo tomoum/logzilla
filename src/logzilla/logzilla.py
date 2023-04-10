@@ -19,7 +19,6 @@ from __future__ import annotations
 import datetime as dt
 import logging
 import time
-from datetime import datetime
 from pathlib import Path
 from typing import Callable
 
@@ -32,7 +31,7 @@ class LogZilla:
     __simple_prepend_info = "%(asctime)s: %(levelname)s: %(message)s"
 
     def __init__(self):
-        raise RuntimeError("Do not instantiate LZ_Logger it is a singleton. You must use its class/static methods")
+        raise RuntimeError(f"Do not instantiate {__class__} it is a singleton. You must use its class/static methods")
 
     @classmethod
     def init_root_logger(
@@ -64,8 +63,10 @@ class LogZilla:
             file_color_on : color ascii escape sequences added to log file
             no_console_file_info: do not include file name and line number on console output
         """
+        if cls.__initialized:
+            raise RuntimeError("LogZilla already initialized.")
 
-        log_file_name = datetime.now().strftime(f"%Y.%m.%d %H.%M.%S {log_file_name_append}.log")
+        log_file_name = dt.datetime.now().strftime(f"%Y.%m.%d %H.%M.%S {log_file_name_append}.log")
         log_file_dir = output_dir / cls.__log_folder_name
         log_file_dir = log_file_dir.absolute()
         log_file_path = log_file_dir / log_file_name
@@ -104,6 +105,9 @@ class LogZilla:
         errstream_handler.setLevel(console_level)
         logger.addHandler(file_handler)
         logger.addHandler(errstream_handler)
+
+        cls.__initialized = True
+        logging.info("LogZilla: Root logger initialized.")
 
     @classmethod
     def log_title(cls, title: str, fill_char: str = "*", width=80):
@@ -157,15 +161,16 @@ class CustomFormatter(logging.Formatter):
         return formatter.format(record)
 
 
+@LogZilla.log_execution_time
 def main() -> None:
     current_file_dir = Path(__file__).absolute().parent
-
     LogZilla.init_root_logger(
         output_dir=current_file_dir,
         console_level=logging.DEBUG,
         file_level=logging.DEBUG,
         no_console_file_info=True,
     )
+    LogZilla.log_title("LogZilla Demo")
 
     logger = logging.getLogger(__name__)
     logger.debug("debug message")
