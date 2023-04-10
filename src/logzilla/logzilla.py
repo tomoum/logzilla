@@ -71,7 +71,7 @@ class LogZilla:
             caller_file = Path(inspect.stack()[1].filename)
             log_file_name_append = caller_file.stem
 
-        log_file_name = dt.datetime.now().strftime(f"%Y.%m.%d %H.%M.%S {log_file_name_append}.log")
+        log_file_name = dt.datetime.now().strftime(f"%Y.%m.%d_%H.%M.%S_{log_file_name_append}.log")
         log_file_dir = output_dir / cls.__log_folder_name
         log_file_dir = log_file_dir.absolute()
         log_file_path = log_file_dir / log_file_name
@@ -175,7 +175,6 @@ def main() -> None:
         output_dir=current_file_dir,
         console_level=logging.DEBUG,
         file_level=logging.DEBUG,
-        no_console_file_info=True,
     )
     LogZilla.log_title("LogZilla Demo")
 
