@@ -16,9 +16,10 @@ Description:
 
 from __future__ import annotations
 
-import datetime
+import datetime as dt
 import logging
 import time
+from datetime import datetime
 from pathlib import Path
 from typing import Callable
 
@@ -26,8 +27,9 @@ from typing import Callable
 class LogZilla:
     __initialized = False
     __log_folder_name = ".log"
-    __lz_date_format = "%Y/%m/%d %H:%M:%S"
-    __lz_prepend_info = "%(asctime)s: %(filename)s:%(lineno)s: %(levelname)s: %(message)s"
+    __date_format = "%Y/%m/%d %H:%M:%S"
+    __default_prepend_info = "%(asctime)s: %(filename)s:%(lineno)s: %(levelname)s: %(message)s"
+    __simple_prepend_info = "%(asctime)s: %(levelname)s: %(message)s"
 
     def __init__(self):
         raise RuntimeError("Do not instantiate LZ_Logger it is a singleton. You must use its class/static methods")
@@ -63,14 +65,7 @@ class LogZilla:
             no_console_file_info: do not include file name and line number on console output
         """
 
-        if cls.__initialized:
-            logging.warning("Root logger already initialized. This call is ignored.")
-            return
-        else:
-            logging.info("Root logger initialized.")
-            cls.__initialized = True
-
-        log_file_name = datetime.datetime.now().strftime(f"%Y.%m.%d %H.%M.%S {log_file_name_append}.log")
+        log_file_name = datetime.now().strftime(f"%Y.%m.%d %H.%M.%S {log_file_name_append}.log")
         log_file_dir = output_dir / cls.__log_folder_name
         log_file_dir = log_file_dir.absolute()
         log_file_path = log_file_dir / log_file_name
@@ -84,19 +79,19 @@ class LogZilla:
         file_formatter = None
 
         if no_console_file_info:
-            console_log_format = "%(asctime)s: %(levelname)s: %(message)s"
+            console_log_format = cls.__simple_prepend_info
         else:
-            console_log_format = cls.__lz_prepend_info
+            console_log_format = cls.__default_prepend_info
 
         if console_color_on:
-            console_formatter = CustomFormatter(fmt=console_log_format, datefmt=cls.__lz_date_format)
+            console_formatter = CustomFormatter(fmt=console_log_format, datefmt=cls.__date_format)
         else:
-            console_formatter = logging.Formatter(fmt=console_log_format, datefmt=cls.__lz_date_format)
+            console_formatter = logging.Formatter(fmt=console_log_format, datefmt=cls.__date_format)
 
         if file_color_on:
-            file_formatter = CustomFormatter(fmt=cls.__lz_prepend_info, datefmt=cls.__lz_date_format)
+            file_formatter = CustomFormatter(fmt=cls.__default_prepend_info, datefmt=cls.__date_format)
         else:
-            file_formatter = logging.Formatter(fmt=cls.__lz_prepend_info, datefmt=cls.__lz_date_format)
+            file_formatter = logging.Formatter(fmt=cls.__default_prepend_info, datefmt=cls.__date_format)
 
         errstream_handler = logging.StreamHandler()
         file_handler.setFormatter(file_formatter)
@@ -129,7 +124,7 @@ class LogZilla:
             before = time.time()
             rv = func(*args, **kwargs)
             elapsed = time.time() - before
-            elapsed = str(datetime.timedelta(seconds=elapsed))
+            elapsed = str(dt.timedelta(seconds=elapsed))
             logger.log(log_level, f"Execution Time of <{func.__name__ }>: {elapsed} hh:mm::ss")
             return rv
 
