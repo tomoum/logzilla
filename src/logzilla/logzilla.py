@@ -68,7 +68,8 @@ class LogZilla:
         if cls.__initialized:
             raise RuntimeError("LogZilla already initialized.")
         if not log_file_name_append:
-            log_file_name_append = inspect.stack()[1].filename
+            caller_file = Path(inspect.stack()[1].filename)
+            log_file_name_append = caller_file.stem
 
         log_file_name = dt.datetime.now().strftime(f"%Y.%m.%d %H.%M.%S {log_file_name_append}.log")
         log_file_dir = output_dir / cls.__log_folder_name
