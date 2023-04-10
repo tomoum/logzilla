@@ -17,6 +17,7 @@ Description:
 from __future__ import annotations
 
 import datetime as dt
+import inspect
 import logging
 import time
 from pathlib import Path
@@ -54,7 +55,8 @@ class LogZilla:
 
         Parameters:
             output_dir : folder where the `.log` folder is created and all log files are created
-            log_file_name_append: append this string to the log file name
+            log_file_name_append: append this string to the log file name if not specified it will default to
+                the name of the file that called this function
             min_level : this is the minimum log level across all modules its best to keep this at DEBUG.
                 e.g if this is logging.ERROR nothing lower severity such as info will be logged
             console_level : terminal print out level
@@ -65,6 +67,8 @@ class LogZilla:
         """
         if cls.__initialized:
             raise RuntimeError("LogZilla already initialized.")
+        if not log_file_name_append:
+            log_file_name_append = inspect.stack()[1].filename
 
         log_file_name = dt.datetime.now().strftime(f"%Y.%m.%d %H.%M.%S {log_file_name_append}.log")
         log_file_dir = output_dir / cls.__log_folder_name
@@ -163,7 +167,9 @@ class CustomFormatter(logging.Formatter):
 
 @LogZilla.log_execution_time
 def main() -> None:
-    current_file_dir = Path(__file__).absolute().parent
+    current_file_path = Path(__file__).absolute()
+    current_file_dir = current_file_path.parent
+
     LogZilla.init_root_logger(
         output_dir=current_file_dir,
         console_level=logging.DEBUG,
