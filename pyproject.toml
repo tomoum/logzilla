@@ -4,7 +4,7 @@ build-backend = "poetry.core.masonry.api"
 
 [tool.poetry]
 name = "logzilla"
-version = "0.2.1a0"
+version = "0.1.0"
 description = "Python logger wrapper for logging to console and file"
 license = "MIT"
 authors = ["Muhab Tomoum <muhabtomoum@gmail.com>"]

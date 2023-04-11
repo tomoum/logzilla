@@ -1,6 +1,6 @@
 # 1. Overview
 
-`logzilla` is a simple yet capable python logging wrapper that gives you better defaults like coloured output.
+*logzilla* is a simple yet capable python logging wrapper that gives you better defaults like coloured output.
 
 # 2. Table of Contents
 
