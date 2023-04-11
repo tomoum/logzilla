@@ -1,16 +1,18 @@
 {
    "version": "0.2",
-   "ignorePaths": [],
-   "dictionaryDefinitions": [],
-   "dictionaries": [],
+   "ignorePaths": [ ],
+   "dictionaryDefinitions": [ ],
+   "dictionaries": [ ],
    "words": [
       "errstream",
       "isort",
       "levelname",
       "levelno",
+      "logzilla",
+      "pylint",
       "pytest",
       "Zilla"
    ],
-   "ignoreWords": [],
-   "import": []
+   "ignoreWords": [ ],
+   "import": [ ]
 }

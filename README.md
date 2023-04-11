@@ -6,13 +6,22 @@
 
 - [1. Overview](#1-overview)
 - [2. Table of Contents](#2-table-of-contents)
-- [3. Demo](#3-demo)
-  - [3.1. Example 1: Minimal example](#31-example-1-minimal-example)
-  - [3.2. Example 2: No file info to console](#32-example-2-no-file-info-to-console)
-- [4. Docs](#4-docs)
+- [3. Installation and usage](#3-installation-and-usage)
+  - [3.1. Installation](#31-installation)
+  - [3.2. Examples](#32-examples)
+  - [3.3. Example 1: Minimal example](#33-example-1-minimal-example)
+  - [3.4. Example 2: No file info to console](#34-example-2-no-file-info-to-console)
+- [4. Other Docs](#4-other-docs)
 - [5. Future Improvements](#5-future-improvements)
 
-# 3. Demo
+# 3. Installation and usage
+
+## 3.1. Installation
+
+It requires Python 3.8.1+ to run.
+`pip install logzilla`
+
+## 3.2. Examples
 
 In both examples a `.log` folder is created in the output directory with the
 following files corresponding to the date and time of execution of each example:
@@ -35,10 +44,10 @@ Sample log file output:
 2023/04/10 15:55:16: logzilla.py:137: INFO: Execution Time of <main>: 0:00:00.012001 hh:mm::ss
 ```
 
-## 3.1. Example 1: Minimal example
+## 3.3. Example 1: Minimal example
 
 ```python
-@LogZilla.log_execution_time
+@log_execution_time
 def main() -> None:
     current_file_path = Path(__file__).absolute()
     current_file_dir = current_file_path.parent
@@ -48,7 +57,7 @@ def main() -> None:
         console_level=logging.DEBUG,
         file_level=logging.DEBUG,
     )
-    LogZilla.log_title("LogZilla Demo")
+    log_title("LogZilla Demo")
 
     logger = logging.getLogger(__name__)
     logger.debug("debug message")
@@ -59,12 +68,13 @@ def main() -> None:
 ```
 
 Output:
-![Simple Demo](docs/assets/simple_example.png)
 
-## 3.2. Example 2: No file info to console
+![simple_example](https://github.com/tomoum/logzilla/blob/main/docs/assets/simple_example.png?raw=true)
+
+## 3.4. Example 2: No file info to console
 
 ```python
-@LogZilla.log_execution_time
+@log_execution_time
 def main() -> None:
     current_file_path = Path(__file__).absolute()
     current_file_dir = current_file_path.parent
@@ -75,7 +85,7 @@ def main() -> None:
         file_level=logging.DEBUG,
         no_console_file_info=True,
     )
-    LogZilla.log_title("LogZilla Demo")
+    log_title("LogZilla Demo")
 
     logger = logging.getLogger(__name__)
     logger.debug("debug message")
@@ -86,13 +96,13 @@ def main() -> None:
 ```
 
 Output:
-![Example CLI Output](docs/assets/no_file_info_to_console.png)
+![no_file_info_to_console](https://github.com/tomoum/logzilla/blob/main/docs/assets/no_file_info_to_console.png?raw=true)
 
-# 4. Docs
+# 4. Other Docs
 
 - [Developer](docs/developer.md)
 
 # 5. Future Improvements
 
 - add unit tests
-- add pre-commit hooks for [black, pyling, flake8, bandit, tox, pytest] for development environment
+- add pre-commit hooks for `black, pylint, flake8, bandit, tox, pytest` for development environment

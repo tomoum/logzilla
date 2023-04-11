@@ -4,14 +4,14 @@ build-backend = "poetry.core.masonry.api"
 
 [tool.poetry]
 name = "logzilla"
-version = "0.2.0"
+version = "0.2.1a0"
 description = "Python logger wrapper for logging to console and file"
 license = "MIT"
 authors = ["Muhab Tomoum <muhabtomoum@gmail.com>"]
 readme = "README.md"
 homepage = "https://github.com/tomoum/logzilla"
 repository = "https://github.com/tomoum/logzilla"
-documentation = "https://github.com/tomoum/logzilla/docs/"
+documentation = "https://github.com/tomoum/logzilla#readme"
 classifiers = [
     "Development Status :: 3 - Alpha",
     "Intended Audience :: Developers",

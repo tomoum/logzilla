@@ -116,30 +116,30 @@ class LogZilla:
         cls.__initialized = True
         logging.info("LogZilla: Root logger initialized.")
 
-    @classmethod
-    def log_title(cls, title: str, fill_char: str = "*", width=80):
-        """Log a consistent section title."""
-        logger = logging.getLogger(__name__)
-        logger.info(f"{fill_char*width}")
-        logger.info(f" {title} ".center(width, fill_char))
-        logger.info(f"{fill_char*width}")
 
-    @classmethod
-    def log_execution_time(cls, func: Callable, log_level: int = logging.INFO) -> Callable:
-        """log the execution time of the function passed in at info level
-        this is intended to be used as a decorator.
-        """
-        logger = logging.getLogger(__name__)
+def log_title(title: str, fill_char: str = "*", width=80):
+    """Log a consistent section title."""
+    logger = logging.getLogger(__name__)
+    logger.info(f"{fill_char*width}")
+    logger.info(f" {title} ".center(width, fill_char))
+    logger.info(f"{fill_char*width}")
 
-        def wrapper(*args, **kwargs):
-            before = time.time()
-            rv = func(*args, **kwargs)
-            elapsed = time.time() - before
-            elapsed = str(dt.timedelta(seconds=elapsed))
-            logger.log(log_level, f"Execution Time of <{func.__name__ }>: {elapsed} hh:mm::ss")
-            return rv
 
-        return wrapper
+def log_execution_time(func: Callable, log_level: int = logging.INFO) -> Callable:
+    """log the execution time of the function passed in at info level
+    this is intended to be used as a decorator.
+    """
+    logger = logging.getLogger(__name__)
+
+    def wrapper(*args, **kwargs):
+        before = time.time()
+        rv = func(*args, **kwargs)
+        elapsed = time.time() - before
+        elapsed = str(dt.timedelta(seconds=elapsed))
+        logger.log(log_level, f"Execution Time of <{func.__name__ }>: {elapsed} hh:mm::ss")
+        return rv
+
+    return wrapper
 
 
 class CustomFormatter(logging.Formatter):
@@ -170,7 +170,7 @@ class CustomFormatter(logging.Formatter):
         return formatter.format(record)
 
 
-@LogZilla.log_execution_time
+@log_execution_time
 def main() -> None:  # pylint: disable=missing-function-docstring
     current_file_path = Path(__file__).absolute()
     current_file_dir = current_file_path.parent
@@ -180,7 +180,7 @@ def main() -> None:  # pylint: disable=missing-function-docstring
         console_level=logging.DEBUG,
         file_level=logging.DEBUG,
     )
-    LogZilla.log_title("LogZilla Demo")
+    log_title("LogZilla Demo")
 
     logger = logging.getLogger(__name__)
     logger.debug("debug message")
